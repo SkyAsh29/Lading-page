@@ -1,0 +1,215 @@
+/* ============================================
+   1. VARIABEL — ubah warna dan foto di sini aja
+   ============================================ */
+:root {
+  --deep: #08242E;      /* biru tua air */
+  --water: #0F5560;     /* teal */
+  --sand: #F4EBDD;      /* warna pasir (background section 2) */
+  --sun: #FF8A3D;       /* oranye matahari (tombol) */
+  --text-light: #FFFFFF;
+
+  /* Foto hero: taruh file di folder images/ dengan nama hero.jpg.
+     Kalau belum ada, otomatis tampil gradasi sebagai cadangan. */
+  --hero-image: url("images/hero.jpg");
+
+  --font: "Sora", "Helvetica Neue", Arial, sans-serif;
+}
+
+/* ============================================
+   2. RESET DASAR
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--deep);
+  background: var(--sand);
+}
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--sun);
+  outline-offset: 3px;
+}
+
+/* ============================================
+   3. TOPBAR (melayang di atas hero)
+   ============================================ */
+.topbar {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  color: var(--text-light);
+}
+
+.brand {
+  font-weight: 800;
+  font-size: 1.15rem;
+  text-decoration: none;
+}
+
+.topbar-link {
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.topbar-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+/* ============================================
+   4. TOMBOL
+   ============================================ */
+.btn {
+  display: inline-block;
+  padding: 14px 28px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--sun);
+  color: var(--deep);
+  font: 600 1rem var(--font);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn:hover { background: #FFA35F; }
+
+/* ============================================
+   5. SECTION 1 — HERO
+   Lapisan background (dari atas ke bawah):
+   overlay gelap -> foto -> cahaya matahari -> gradasi dasar
+   ============================================ */
+.hero {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding: 120px 24px 72px;
+  color: var(--text-light);
+  background:
+    linear-gradient(180deg, rgba(8, 36, 46, 0.35), rgba(8, 36, 46, 0.85)),
+    var(--hero-image) center / cover no-repeat,
+    radial-gradient(circle at 78% 28%, rgba(255, 150, 70, 0.6), transparent 30%),
+    linear-gradient(160deg, var(--water), var(--deep));
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 640px;
+}
+
+.hero h1 {
+  margin: 0 0 16px;
+  font-weight: 800;
+  font-size: clamp(2.4rem, 9vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.hero p {
+  max-width: 44ch;
+  margin: 0 0 28px;
+  font-size: 1.125rem;
+  opacity: 0.92;
+}
+
+/* ============================================
+   6. SECTION 2 — CONTACT
+   ============================================ */
+.contact {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  padding: 64px 24px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+.contact h2 {
+  margin: 0 0 12px;
+  font-weight: 800;
+  font-size: clamp(1.9rem, 6vw, 2.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.contact-info p { max-width: 40ch; margin: 0 0 20px; }
+
+.perks {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.perks li {
+  padding: 12px 0;
+  border-top: 1px solid rgba(8, 36, 46, 0.2);
+}
+
+.perks li:last-child { border-bottom: 1px solid rgba(8, 36, 46, 0.2); }
+
+/* Form */
+.booking {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.booking label {
+  margin-top: 10px;
+  font-weight: 600;
+}
+
+.booking input,
+.booking textarea {
+  width: 100%;
+  padding: 12px 14px;
+  border: 2px solid rgba(8, 36, 46, 0.25);
+  border-radius: 12px;
+  background: #fff;
+  color: var(--deep);
+  font: 400 1rem var(--font);
+}
+
+.booking input:focus,
+.booking textarea:focus {
+  outline: none;
+  border-color: var(--water);
+}
+
+.booking .btn { margin-top: 20px; align-self: flex-start; }
+
+/* Layar lebar: bagi jadi 2 kolom */
+@media (min-width: 800px) {
+  .contact {
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    padding: 96px 32px;
+  }
+  .topbar { padding: 28px 48px; }
+  .hero { padding: 140px 48px 96px; }
+}
+
+/* ============================================
+   7. FOOTER
+   ============================================ */
+.footer {
+  padding: 24px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--sand);
+  background: var(--deep);
+}
+
+/* Hormati pengguna yang matiin animasi */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
