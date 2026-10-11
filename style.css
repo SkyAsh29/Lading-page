@@ -233,3 +233,62 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* ============================================
+   9. LIGHTBOX (foto membesar saat diklik)
+   ============================================ */
+.gallery-grid img { cursor: zoom-in; }
+
+.lightbox[hidden] { display: none; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8, 16, 28, 0.94);
+}
+
+.lightbox img {
+  max-width: 92vw;
+  max-height: 84vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.lb-close,
+.lb-nav {
+  position: absolute;
+  border: 0;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-family: var(--font);
+  cursor: pointer;
+  border-radius: 50%;
+}
+
+.lb-close:hover,
+.lb-nav:hover { background: rgba(255, 255, 255, 0.28); }
+
+.lb-close {
+  top: 16px;
+  right: 16px;
+  width: 44px;
+  height: 44px;
+  font-size: 1.75rem;
+  line-height: 1;
+}
+
+.lb-nav {
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.lb-prev { left: 12px; }
+.lb-next { right: 12px; }
