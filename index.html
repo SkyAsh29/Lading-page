@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Baris ini bikin tampilan pas di layar HP -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Telaga Biru Fishing Spot</title>
+  <meta name="description" content="Calm lake fishing spot with fresh catch and friendly service. Book your spot today.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <!-- Sambungkan file CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="topbar">
+    <a class="brand" href="#hero">Telaga Biru</a>
+    <a class="topbar-link" href="#contact">Contact</a>
+  </header>
+
+  <main>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <h1>Your next big catch is waiting.</h1>
+        <p>A calm lake, fresh bait, and a quiet morning. Reserve your spot and just bring yourself.</p>
+        <a class="btn" href="#contact">Book a spot</a>
+      </div>
+    </section>
+
+    <!-- SECTION 2: CONTACT / BOOKING -->
+    <section class="contact" id="contact">
+      <div class="contact-info">
+        <h2>Book your spot</h2>
+        <p>Tell us when you want to come. We reply on WhatsApp within the day.</p>
+        <ul class="perks">
+          <li>Rods and bait available to rent</li>
+          <li>Open every day, 6 AM to 6 PM</li>
+          <li>Free parking and a shaded rest area</li>
+        </ul>
+      </div>
+
+      <form class="booking" id="booking-form">
+        <label for="name">Your name</label>
+        <input id="name" name="name" type="text" autocomplete="name" required>
+
+        <label for="date">Visit date</label>
+        <input id="date" name="date" type="date">
+
+        <label for="message">Message</label>
+        <textarea id="message" name="message" rows="4" placeholder="How many people are coming?"></textarea>
+
+        <button class="btn" type="submit">Send on WhatsApp</button>
+      </form>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <span>&copy; <span id="year"></span> Telaga Biru Fishing Spot</span>
+  </footer>
+
+  <!-- Sambungkan file JavaScript (defer = jalan setelah halaman selesai dimuat) -->
+  <script src="script.js" defer></script>
+</body>
+</html>
