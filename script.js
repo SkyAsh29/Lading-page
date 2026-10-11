@@ -1,235 +1,52 @@
-/* ============================================
-   1. VARIABEL — ubah warna di sini aja
-   ============================================ */
-:root {
-  --deep: #14263F;      /* biru denim gelap */
-  --water: #2C4A6E;     /* biru denim */
-  --sand: #F4EBDD;      /* warna pasir (background section 2) */
-  --sun: #FF8A3D;       /* oranye (tombol) */
-  --text-light: #FFFFFF;
-  --font: "Sora", "Helvetica Neue", Arial, sans-serif;
-}
+// ============================================
+// 1. Isi tahun di footer otomatis
+// ============================================
+document.getElementById("year").textContent = new Date().getFullYear();
 
-/* ============================================
-   2. RESET DASAR
-   ============================================ */
-*, *::before, *::after { box-sizing: border-box; }
+// ============================================
+// 2. Form booking -> kirim lewat WhatsApp
+// GANTI nomor di bawah ke nomor kamu (format 62812..., tanpa + dan tanpa 0 di depan)
+// ============================================
+const WA_NUMBER = "6281234567890";
 
-html { scroll-behavior: smooth; }
+const form = document.getElementById("booking-form");
 
-body {
-  margin: 0;
-  font-family: var(--font);
-  font-size: 1rem;
-  line-height: 1.6;
-  color: var(--deep);
-  background: var(--sand);
-}
+form.addEventListener("submit", function (event) {
+  event.preventDefault();
 
-a { color: inherit; }
+  const name = form.elements["name"].value.trim();
+  const date = form.elements["date"].value;
+  const message = form.elements["message"].value.trim();
 
-:focus-visible {
-  outline: 3px solid var(--sun);
-  outline-offset: 3px;
-}
+  let text = "Hi, I'm " + name + ".";
+  if (date) text += " I'd like to book a session on " + date + ".";
+  if (message) text += " " + message;
 
-/* ============================================
-   3. TOPBAR (melayang di atas hero)
-   ============================================ */
-.topbar {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  z-index: 10;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-  color: var(--text-light);
-}
+  const url = "https://wa.me/" + WA_NUMBER + "?text=" + encodeURIComponent(text);
+  window.open(url, "_blank");
+});
 
-.brand {
-  font-weight: 800;
-  font-size: 1.15rem;
-  text-decoration: none;
-}
+// ============================================
+// 3. Tombol Gallery -> tampilkan galeri lalu geser ke sana
+// ============================================
+const galleryBtn = document.getElementById("gallery-btn");
+const gallerySection = document.getElementById("gallery");
 
-.topbar-link {
-  font-weight: 600;
-  text-decoration: none;
-}
+galleryBtn.addEventListener("click", function (event) {
+  event.preventDefault();
+  gallerySection.hidden = false;
+  gallerySection.scrollIntoView({ behavior: "smooth" });
+});
 
-.topbar-link:hover { text-decoration: underline; text-underline-offset: 4px; }
-
-/* ============================================
-   4. TOMBOL
-   ============================================ */
-.btn {
-  display: inline-block;
-  padding: 14px 28px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--sun);
-  color: var(--deep);
-  font: 600 1rem var(--font);
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.btn:hover { background: #FFA35F; }
-
-/* ============================================
-   5. SECTION 1 — HERO
-   ============================================ */
-.hero {
-  min-height: 100vh;
-  min-height: 100svh;
-  display: flex;
-  align-items: flex-end;
-  padding: 120px 24px 72px;
-  color: var(--text-light);
-  background: linear-gradient(160deg, var(--water), var(--deep));
-}
-
-.hero-content {
-  width: 100%;
-  max-width: 640px;
-}
-
-.hero h1 {
-  margin: 0 0 16px;
-  font-weight: 800;
-  font-size: clamp(2.4rem, 9vw, 4.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-}
-
-.hero p {
-  max-width: 44ch;
-  margin: 0 0 28px;
-  font-size: 1.125rem;
-  opacity: 0.92;
-}
-
-/* ============================================
-   6. GALERI (muncul setelah tombol Gallery ditekan)
-   ============================================ */
-.gallery[hidden] { display: none; }
-
-.gallery {
-  padding: 32px 24px 8px;
-  background: var(--deep);
-}
-
-.gallery-grid {
-  column-count: 2;
-  column-gap: 12px;
-  max-width: 1040px;
-  margin: 0 auto;
-}
-
-/* Foto tampil utuh (tidak dipotong), portrait dan landscape bisa campur */
-.gallery-grid img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin-bottom: 12px;
-  border-radius: 12px;
-  break-inside: avoid;
-}
-
-.gallery-cta {
-  text-align: center;
-  padding: 32px 0 40px;
-}
-
-/* ============================================
-   7. SECTION 2 — CONTACT
-   ============================================ */
-.contact {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 40px;
-  padding: 64px 24px;
-  max-width: 1040px;
-  margin: 0 auto;
-}
-
-.contact h2 {
-  margin: 0 0 12px;
-  font-weight: 800;
-  font-size: clamp(1.9rem, 6vw, 2.75rem);
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
-
-.contact-info p { max-width: 40ch; margin: 0 0 20px; }
-
-.perks {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.perks li {
-  padding: 12px 0;
-  border-top: 1px solid rgba(20, 38, 63, 0.2);
-}
-
-.perks li:last-child { border-bottom: 1px solid rgba(20, 38, 63, 0.2); }
-
-.booking {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.booking label {
-  margin-top: 10px;
-  font-weight: 600;
-}
-
-.booking input,
-.booking textarea {
-  width: 100%;
-  padding: 12px 14px;
-  border: 2px solid rgba(20, 38, 63, 0.25);
-  border-radius: 12px;
-  background: #fff;
-  color: var(--deep);
-  font: 400 1rem var(--font);
-}
-
-.booking input:focus,
-.booking textarea:focus {
-  outline: none;
-  border-color: var(--water);
-}
-
-.booking .btn { margin-top: 20px; align-self: flex-start; }
-
-/* Layar lebar: galeri 4 kolom, contact 2 kolom */
-@media (min-width: 800px) {
-  .topbar { padding: 28px 48px; }
-  .hero { padding: 140px 48px 96px; }
-  .gallery-grid { column-count: 3; }
-  .contact {
-    grid-template-columns: 1fr 1fr;
-    gap: 72px;
-    padding: 96px 32px;
+// ============================================
+// 4. Sembunyikan foto yang filenya belum diupload
+// (jadi gak muncul ikon gambar rusak)
+// ============================================
+document.querySelectorAll(".gallery-grid img").forEach(function (img) {
+  img.addEventListener("error", function () {
+    img.style.display = "none";
+  });
+  if (img.complete && img.naturalWidth === 0 && img.getAttribute("loading") !== "lazy") {
+    img.style.display = "none";
   }
-}
-
-/* ============================================
-   8. FOOTER
-   ============================================ */
-.footer {
-  padding: 24px;
-  text-align: center;
-  font-size: 0.9rem;
-  color: var(--sand);
-  background: var(--deep);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-}
+});
