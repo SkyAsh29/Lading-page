@@ -1,17 +1,12 @@
 /* ============================================
-   1. VARIABEL — ubah warna dan foto di sini aja
+   1. VARIABEL — ubah warna di sini aja
    ============================================ */
 :root {
-  --deep: #08242E;      /* biru tua air */
-  --water: #0F5560;     /* teal */
+  --deep: #14263F;      /* biru denim gelap */
+  --water: #2C4A6E;     /* biru denim */
   --sand: #F4EBDD;      /* warna pasir (background section 2) */
-  --sun: #FF8A3D;       /* oranye matahari (tombol) */
+  --sun: #FF8A3D;       /* oranye (tombol) */
   --text-light: #FFFFFF;
-
-  /* Foto hero: taruh file di folder images/ dengan nama hero.jpg.
-     Kalau belum ada, otomatis tampil gradasi sebagai cadangan. */
-  --hero-image: url("images/hero.jpg");
-
   --font: "Sora", "Helvetica Neue", Arial, sans-serif;
 }
 
@@ -84,8 +79,6 @@ a { color: inherit; }
 
 /* ============================================
    5. SECTION 1 — HERO
-   Lapisan background (dari atas ke bawah):
-   overlay gelap -> foto -> cahaya matahari -> gradasi dasar
    ============================================ */
 .hero {
   min-height: 100vh;
@@ -94,11 +87,7 @@ a { color: inherit; }
   align-items: flex-end;
   padding: 120px 24px 72px;
   color: var(--text-light);
-  background:
-    linear-gradient(180deg, rgba(8, 36, 46, 0.35), rgba(8, 36, 46, 0.85)),
-    var(--hero-image) center / cover no-repeat,
-    radial-gradient(circle at 78% 28%, rgba(255, 150, 70, 0.6), transparent 30%),
-    linear-gradient(160deg, var(--water), var(--deep));
+  background: linear-gradient(160deg, var(--water), var(--deep));
 }
 
 .hero-content {
@@ -122,7 +111,39 @@ a { color: inherit; }
 }
 
 /* ============================================
-   6. SECTION 2 — CONTACT
+   6. GALERI (muncul setelah tombol Gallery ditekan)
+   ============================================ */
+.gallery[hidden] { display: none; }
+
+.gallery {
+  padding: 32px 24px 8px;
+  background: var(--deep);
+}
+
+.gallery-grid {
+  column-count: 2;
+  column-gap: 12px;
+  max-width: 1040px;
+  margin: 0 auto;
+}
+
+/* Foto tampil utuh (tidak dipotong), portrait dan landscape bisa campur */
+.gallery-grid img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+  border-radius: 12px;
+  break-inside: avoid;
+}
+
+.gallery-cta {
+  text-align: center;
+  padding: 32px 0 40px;
+}
+
+/* ============================================
+   7. SECTION 2 — CONTACT
    ============================================ */
 .contact {
   display: grid;
@@ -151,12 +172,11 @@ a { color: inherit; }
 
 .perks li {
   padding: 12px 0;
-  border-top: 1px solid rgba(8, 36, 46, 0.2);
+  border-top: 1px solid rgba(20, 38, 63, 0.2);
 }
 
-.perks li:last-child { border-bottom: 1px solid rgba(8, 36, 46, 0.2); }
+.perks li:last-child { border-bottom: 1px solid rgba(20, 38, 63, 0.2); }
 
-/* Form */
 .booking {
   display: flex;
   flex-direction: column;
@@ -172,7 +192,7 @@ a { color: inherit; }
 .booking textarea {
   width: 100%;
   padding: 12px 14px;
-  border: 2px solid rgba(8, 36, 46, 0.25);
+  border: 2px solid rgba(20, 38, 63, 0.25);
   border-radius: 12px;
   background: #fff;
   color: var(--deep);
@@ -187,19 +207,20 @@ a { color: inherit; }
 
 .booking .btn { margin-top: 20px; align-self: flex-start; }
 
-/* Layar lebar: bagi jadi 2 kolom */
+/* Layar lebar: galeri 4 kolom, contact 2 kolom */
 @media (min-width: 800px) {
+  .topbar { padding: 28px 48px; }
+  .hero { padding: 140px 48px 96px; }
+  .gallery-grid { column-count: 3; }
   .contact {
     grid-template-columns: 1fr 1fr;
     gap: 72px;
     padding: 96px 32px;
   }
-  .topbar { padding: 28px 48px; }
-  .hero { padding: 140px 48px 96px; }
 }
 
 /* ============================================
-   7. FOOTER
+   8. FOOTER
    ============================================ */
 .footer {
   padding: 24px;
@@ -209,49 +230,6 @@ a { color: inherit; }
   background: var(--deep);
 }
 
-/* Hormati pengguna yang matiin animasi */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
-
-.foto {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
-.gallery { background: var(--deep); }
-
-.gallery-track {
-  display: flex;
-  align-items: center;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-}
-.gallery-track::-webkit-scrollbar { display: none; }
-
-.gallery-track img {
-  flex: 0 0 100%;
-  width: 100%;
-  height: auto;
-  max-height: 85vh;
-  object-fit: contain;
-  scroll-snap-align: center;
-  display: block;
-}
-
-.gallery-dots {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 14px 0;
-}
-.gallery-dots button {
-  width: 10px; height: 10px;
-  padding: 0; border: 0;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.4);
-  cursor: pointer;
-}
-.gallery-dots button.active { background: var(--sun); }
